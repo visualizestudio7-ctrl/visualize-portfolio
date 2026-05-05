@@ -1,140 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Modern House | Visualize Studio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Modern House | Visualize Studio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- FONTS -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: #f2f2f2;
-    }
+<style>
+body { margin:0; font-family:'Inter', sans-serif; background:#f2f2f2; }
 
-    h1, h2 {
-      font-family: 'Playfair Display', serif;
-    }
+h1 { font-family:'Playfair Display', serif; font-size:48px; }
+p { color:#666; line-height:1.6; max-width:700px; }
 
-    h1 {
-      font-size: 48px;
-      margin-bottom: 20px;
-    }
+/* ANIMAÇÃO */
+.reveal { opacity:0; transform:translateY(60px); transition:1.2s cubic-bezier(0.22,1,0.36,1); }
+.reveal.show { opacity:1; transform:translateY(0); }
 
-    p {
-      color: #666;
-      line-height: 1.6;
-    }
+/* HERO */
+.hero { height:60vh; }
+.hero img { width:100%; height:100%; object-fit:cover; }
 
-    /* ANIMAÇÃO */
-    .reveal {
-      opacity: 0;
-      transform: translateY(50px);
-      transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
-    }
+/* CONTAINER */
+.container { max-width:1100px; margin:auto; padding:80px 20px; }
 
-    .reveal.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
+/* GALERIA */
+.gallery {
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(400px,1fr));
+gap:30px;
+margin-top:50px;
+}
 
-    /* HERO */
-    .hero {
-      height: 60vh;
-      position: relative;
-    }
+.gallery img {
+width:100%;
+border-radius:6px;
+transition:0.5s;
+}
 
-    .hero img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+.gallery img:hover { transform:scale(1.03); }
 
-    /* CONTEÚDO */
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 60px 20px;
-    }
-
-    /* GALERIA */
-    .gallery {
-      display: grid;
-      gap: 20px;
-      margin-top: 40px;
-    }
-
-    .gallery img {
-      width: 100%;
-      display: block;
-      transition: transform 0.6s ease;
-    }
-
-    .gallery img:hover {
-      transform: scale(1.03);
-    }
-
-    /* BOTÃO VOLTAR */
-    .back {
-      display: inline-block;
-      margin-bottom: 20px;
-      text-decoration: none;
-      color: black;
-      font-weight: 500;
-    }
-
-    .back:hover {
-      opacity: 0.6;
-    }
-  </style>
+/* BACK */
+.back {
+display:inline-block;
+margin-bottom:30px;
+text-decoration:none;
+color:black;
+font-weight:500;
+}
+</style>
 </head>
 
 <body>
 
-  <!-- HERO -->
-  <div class="hero">
-    <img src="render-casa.jpg">
-  </div>
+<div class="hero">
+<img src="render-casa.jpg">
+</div>
 
-  <!-- CONTEÚDO -->
-  <div class="container">
+<div class="container">
+<a href="index.html" class="back">← Back to Home</a>
 
-    <a href="index.html" class="back">← Back to Home</a>
+<h1 class="reveal">Modern House</h1>
 
-    <h1 class="reveal">Modern House</h1>
+<p class="reveal">
+High-end residential visualization focused on light, materials and atmosphere.
+</p>
 
-    <p class="reveal">
-      This project focuses on a high-end residential visualization designed to highlight
-      natural lighting, material realism, and spatial harmony. The goal was to create
-      images that not only represent the architecture but also help communicate the
-      lifestyle and atmosphere of the space.
-    </p>
+<div class="gallery">
+<img src="render-casa.jpg" class="reveal">
+<img src="render-casa.jpg" class="reveal">
+<img src="render-casa.jpg" class="reveal">
+</div>
+</div>
 
-    <div class="gallery">
-      <img src="render-casa.jpg" class="reveal">
-      <img src="render-casa.jpg" class="reveal">
-      <img src="render-casa.jpg" class="reveal">
-    </div>
-
-  </div>
-
-  <!-- SCRIPT -->
-  <script>
-    const elements = document.querySelectorAll('.reveal');
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
-        }
-      });
-    }, { threshold: 0.15 });
-
-    elements.forEach(el => observer.observe(el));
-  </script>
+<script>
+const els=document.querySelectorAll('.reveal');
+const obs=new IntersectionObserver(e=>{
+e.forEach(i=>{if(i.isIntersecting)i.target.classList.add('show')});
+});
+els.forEach(el=>obs.observe(el));
+</script>
 
 </body>
 </html>
