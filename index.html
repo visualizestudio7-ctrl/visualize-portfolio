@@ -39,7 +39,7 @@
       color: #666;
     }
 
-    /* ANIMAÇÃO */
+    /* ANIMAÇÃO PREMIUM */
     .reveal {
       opacity: 0;
       transform: translateY(60px);
@@ -51,16 +51,27 @@
       transform: translateY(0);
     }
 
+    .delay-1 { transition-delay: 0.2s; }
+    .delay-2 { transition-delay: 0.4s; }
+    .delay-3 { transition-delay: 0.6s; }
+
     /* HERO */
     .hero {
       position: relative;
       height: 100vh;
+      overflow: hidden;
     }
 
     .hero img {
       width: 100%;
       height: 110%;
       object-fit: cover;
+      animation: fadeIn 2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(1.05); }
+      to { opacity: 1; transform: scale(1); }
     }
 
     .overlay {
@@ -70,11 +81,9 @@
       width:100%;
       height:100%;
       background: linear-gradient(to bottom, rgba(0,0,0,0.65), rgba(0,0,0,0.4));
-      
       display:flex;
       justify-content:center;
       align-items:center;
-      
       text-align:center;
       padding:40px;
       color:white;
@@ -85,14 +94,7 @@
       margin: 0 auto;
     }
 
-    .hero h1 {
-      margin-left: auto;
-      margin-right: auto;
-    }
-
     .hero p {
-      margin-left: auto;
-      margin-right: auto;
       color: #eee;
       font-size: 18px;
     }
@@ -117,7 +119,7 @@
       padding:80px;
     }
 
-    /* GRID PROJETOS */
+    /* GRID (mantido) */
     .grid {
       display:grid;
       grid-template-columns:repeat(auto-fit, minmax(300px,1fr));
@@ -174,15 +176,15 @@
     <div class="overlay">
       <div class="hero-content">
         <h1 class="reveal">
-          High-end 3D renders for architects and developers.
+          We create images that help sell architecture before it's built.
         </h1>
 
-        <p class="reveal">
-          We help you sell projects before they are built.
+        <p class="reveal delay-1">
+          Photorealistic 3D visualization for architects and real estate projects.
         </p>
 
-        <a href="https://wa.me/SEUNUMERO" class="cta reveal">
-          Start a Project
+        <a href="https://wa.me/SEUNUMERO" class="cta reveal delay-2">
+          Request a Quote
         </a>
       </div>
     </div>
@@ -199,7 +201,7 @@
           <img src="render-casa.jpg">
         </a>
         <h3>Modern House</h3>
-        <p>High-end residential visualization with focus on natural light.</p>
+        <p>Residential visualization focused on light, realism and atmosphere.</p>
       </div>
 
       <div class="project reveal">
@@ -207,7 +209,7 @@
           <img src="render-clinica.jpg">
         </a>
         <h3>Medical Clinic</h3>
-        <p>Commercial project designed to attract clients and investors.</p>
+        <p>Clean and modern commercial space designed to attract clients.</p>
       </div>
 
       <div class="project reveal">
@@ -215,7 +217,7 @@
           <img src="render-quarto.jpg">
         </a>
         <h3>Interior Bedroom</h3>
-        <p>Interior visualization focused on comfort and realism.</p>
+        <p>Interior scene with focus on materials and soft lighting.</p>
       </div>
 
       <div class="project reveal">
@@ -223,7 +225,7 @@
           <img src="render-recepcao.jpg">
         </a>
         <h3>Reception Area</h3>
-        <p>Corporate space designed to impress on first contact.</p>
+        <p>Designed to create a strong and professional first impression.</p>
       </div>
 
     </div>
@@ -234,9 +236,9 @@
     <h2 class="reveal">About</h2>
 
     <p class="reveal">
-      We specialize in photorealistic 3D visualization for architecture and real estate.
-      Our goal is to create images that not only look beautiful, but also help sell ideas,
-      attract investors and communicate projects with clarity.
+      We create photorealistic images that help communicate architectural ideas clearly.
+      Each project is developed with attention to lighting, materials and composition,
+      aiming to deliver images that feel real and impactful.
     </p>
   </div>
 
