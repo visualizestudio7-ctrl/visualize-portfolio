@@ -16,34 +16,38 @@
       overflow-x: hidden;
     }
 
-    h1, h2, h3 {
-      font-family: 'Playfair Display', serif;
-    }
-
     h1 {
-      font-size: 56px;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 5vw, 56px);
       line-height: 1.1;
-      margin-bottom: 20px;
+      letter-spacing: -1px;
     }
 
-    h2 {
-      font-size: 32px;
-      margin-bottom: 30px;
+    h2 { font-size: 32px; }
+    h3 { margin: 10px 0 5px; }
+
+    p { color: #666; }
+
+    /* SWUP TRANSITION */
+    #swup {
+      transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    h3 {
-      margin: 10px 0 5px;
+    html.is-animating #swup {
+      opacity: 0;
+      transform: translateY(20px);
     }
 
-    p {
-      color: #666;
+    html.is-leaving #swup {
+      opacity: 0;
+      transform: scale(0.98);
     }
 
-    /* ANIMAÇÃO PREMIUM */
+    /* ANIMAÇÃO INTERNA */
     .reveal {
       opacity: 0;
       transform: translateY(60px);
-      transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: 1.2s cubic-bezier(0.22,1,0.36,1);
     }
 
     .reveal.show {
@@ -53,7 +57,6 @@
 
     .delay-1 { transition-delay: 0.2s; }
     .delay-2 { transition-delay: 0.4s; }
-    .delay-3 { transition-delay: 0.6s; }
 
     /* HERO */
     .hero {
@@ -66,20 +69,11 @@
       width: 100%;
       height: 110%;
       object-fit: cover;
-      animation: fadeIn 2s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(1.05); }
-      to { opacity: 1; transform: scale(1); }
     }
 
     .overlay {
       position: absolute;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
+      inset: 0;
       background: linear-gradient(to bottom, rgba(0,0,0,0.65), rgba(0,0,0,0.4));
       display:flex;
       justify-content:center;
@@ -89,15 +83,7 @@
       color:white;
     }
 
-    .hero-content {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .hero p {
-      color: #eee;
-      font-size: 18px;
-    }
+    .hero-content { max-width: 900px; }
 
     .cta {
       margin-top: 25px;
@@ -106,43 +92,31 @@
       color:black;
       padding:14px 28px;
       text-decoration:none;
-      font-weight:500;
-      transition:0.3s;
-    }
-
-    .cta:hover {
-      background:#ddd;
     }
 
     /* SECTION */
-    .section {
-      padding:80px;
-    }
+    .section { padding:80px; }
 
-    /* GRID (mantido) */
+    /* GRID */
     .grid {
       display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(300px,1fr));
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
       gap:30px;
+    }
+
+    .project {
+      overflow:hidden;
     }
 
     .project img {
       width:100%;
-      display:block;
-      transition: transform 0.6s ease;
+      cursor:pointer;
+      transition:0.6s;
     }
 
-    .project img:hover {
-      transform: scale(1.05);
-    }
-
-    .project p {
-      font-size:14px;
-    }
-
-    /* ABOUT */
-    .about {
-      background:white;
+    .project:hover img {
+      transform:scale(1.08);
+      filter:brightness(0.9);
     }
 
     /* CONTACT */
@@ -152,26 +126,35 @@
       padding:60px;
     }
 
-    /* WHATSAPP */
+    /* WHATS */
     .whatsapp {
       position:fixed;
       bottom:20px;
       right:20px;
-      background:#25D366;
+      background:black;
       color:white;
-      padding:15px 20px;
+      padding:12px 18px;
       border-radius:50px;
       text-decoration:none;
-      font-weight:bold;
+      border:1px solid white;
     }
+
+    /* MOBILE */
+    @media (max-width:768px){
+      .section { padding:50px 20px; }
+      .overlay { padding:20px; }
+    }
+
   </style>
 </head>
 
 <body>
 
+<div id="swup">
+
   <!-- HERO -->
   <div class="hero">
-    <img id="hero-img" src="render-clinica.jpg">
+    <img src="render-clinica.jpg">
 
     <div class="overlay">
       <div class="hero-content">
@@ -180,7 +163,7 @@
         </h1>
 
         <p class="reveal delay-1">
-          Photorealistic 3D visualization for architects and real estate projects.
+          Photorealistic 3D visualization for architects and real estate.
         </p>
 
         <a href="https://wa.me/SEUNUMERO" class="cta reveal delay-2">
@@ -201,7 +184,7 @@
           <img src="render-casa.jpg">
         </a>
         <h3>Modern House</h3>
-        <p>Residential visualization focused on light, realism and atmosphere.</p>
+        <p>Residential visualization focused on light and realism.</p>
       </div>
 
       <div class="project reveal">
@@ -209,7 +192,7 @@
           <img src="render-clinica.jpg">
         </a>
         <h3>Medical Clinic</h3>
-        <p>Clean and modern commercial space designed to attract clients.</p>
+        <p>Clean commercial space designed to attract clients.</p>
       </div>
 
       <div class="project reveal">
@@ -217,7 +200,7 @@
           <img src="render-quarto.jpg">
         </a>
         <h3>Interior Bedroom</h3>
-        <p>Interior scene with focus on materials and soft lighting.</p>
+        <p>Interior scene focused on comfort and lighting.</p>
       </div>
 
       <div class="project reveal">
@@ -225,55 +208,45 @@
           <img src="render-recepcao.jpg">
         </a>
         <h3>Reception Area</h3>
-        <p>Designed to create a strong and professional first impression.</p>
+        <p>Designed to create a strong first impression.</p>
       </div>
 
     </div>
   </div>
 
-  <!-- ABOUT -->
-  <div class="section about">
-    <h2 class="reveal">About</h2>
-
-    <p class="reveal">
-      We create photorealistic images that help communicate architectural ideas clearly.
-      Each project is developed with attention to lighting, materials and composition,
-      aiming to deliver images that feel real and impactful.
-    </p>
-  </div>
-
   <!-- CONTACT -->
   <div class="contact">
-    <h2 class="reveal">Contact</h2>
-    <p class="reveal">visualize.studio.7@gmail.com</p>
-    <p class="reveal">@_visualize.studio_</p>
+    <h2>Contact</h2>
+    <p>visualize.studio.7@gmail.com</p>
+    <p>@_visualize.studio_</p>
   </div>
 
-  <!-- WHATSAPP -->
-  <a href="https://wa.me/SEUNUMERO" class="whatsapp">
-    WhatsApp
-  </a>
+</div>
 
-  <!-- SCRIPT -->
-  <script>
-    const elements = document.querySelectorAll('.reveal');
+<a href="https://wa.me/SEUNUMERO" class="whatsapp">WhatsApp</a>
 
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
-        }
-      });
-    }, { threshold: 0.15 });
+<!-- SWUP -->
+<script src="https://unpkg.com/swup@4"></script>
 
-    elements.forEach(el => observer.observe(el));
+<script>
+const swup = new Swup();
 
-    const heroImg = document.getElementById('hero-img');
-
-    window.addEventListener('scroll', () => {
-      heroImg.style.transform = `translateY(${window.scrollY * 0.3}px)`;
+function initAnimations(){
+  const els=document.querySelectorAll('.reveal');
+  const obs=new IntersectionObserver(e=>{
+    e.forEach(i=>{
+      if(i.isIntersecting) i.target.classList.add('show');
     });
-  </script>
+  });
+  els.forEach(el=>obs.observe(el));
+}
+
+initAnimations();
+
+swup.hooks.on('page:view', () => {
+  initAnimations();
+});
+</script>
 
 </body>
 </html>
