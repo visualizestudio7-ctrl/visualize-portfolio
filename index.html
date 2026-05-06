@@ -5,56 +5,37 @@
 <title>Visualize Studio</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
 body {
   margin:0;
   font-family:'Inter', sans-serif;
   background:#f2f2f2;
-  overflow-x:hidden;
+  color:#111;
 }
 
+/* TIPOGRAFIA */
 h1 {
   font-family:'Playfair Display', serif;
-  font-size:clamp(32px,5vw,56px);
-  line-height:1.1;
+  font-size:clamp(36px,6vw,72px);
+  line-height:1.05;
+  letter-spacing:-1px;
 }
 
-h2 { font-size:32px; }
-p { color:#666; }
-
-/* TRANSIÇÃO */
-#swup {
-  transition:0.6s cubic-bezier(0.22,1,0.36,1);
+h2 {
+  font-size:28px;
+  margin-bottom:40px;
 }
 
-html.is-animating #swup {
-  opacity:0;
-  transform:translateY(20px);
-}
-
-html.is-leaving #swup {
-  opacity:0;
-  transform:scale(0.98);
-}
-
-/* ANIMAÇÃO */
-.reveal {
-  opacity:0;
-  transform:translateY(60px);
-  transition:1.2s cubic-bezier(0.22,1,0.36,1);
-}
-
-.reveal.show {
-  opacity:1;
-  transform:translateY(0);
+p {
+  color:#666;
 }
 
 /* HERO */
 .hero {
-  position:relative;
   height:100vh;
+  position:relative;
 }
 
 .hero img {
@@ -66,22 +47,45 @@ html.is-leaving #swup {
 .overlay {
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,0.5);
+  background:linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.3));
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
-  padding:40px;
-  color:white;
+  padding:20px;
 }
 
 .hero-content {
-  max-width:700px;
+  max-width:650px;
+  color:white;
 }
 
-/* SEÇÕES */
+.hero p {
+  margin-top:20px;
+  font-size:18px;
+  color:rgba(255,255,255,0.8);
+}
+
+/* CTA */
+.cta {
+  display:inline-block;
+  margin-top:30px;
+  padding:14px 28px;
+  background:white;
+  color:black;
+  text-decoration:none;
+  font-size:14px;
+  letter-spacing:0.5px;
+  transition:0.3s;
+}
+
+.cta:hover {
+  background:#ddd;
+}
+
+/* SEÇÃO */
 .section {
-  padding:80px;
+  padding:120px 20px;
 }
 
 .container {
@@ -92,48 +96,73 @@ html.is-leaving #swup {
 /* GRID */
 .grid {
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:30px;
+  grid-template-columns:repeat(2, 1fr);
+  gap:40px;
 }
 
-/* PROJETOS */
+/* PROJETO */
+.project {
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+  transition:transform 0.4s ease;
+}
+
+.project:hover {
+  transform:translateY(-8px);
+}
+
 .project img {
   width:100%;
-  max-width:420px;
-  margin:0 auto;
-  display:block;
-  transition:0.5s;
+  height:420px;
+  object-fit:cover;
+  transition:0.6s ease;
 }
 
-.project img:hover {
+.project:hover img {
   transform:scale(1.05);
 }
 
-.project h3,
-.project p {
-  max-width:420px;
-  margin-left:auto;
-  margin-right:auto;
+/* OVERLAY TEXTO */
+.project-info {
+  margin-top:15px;
+}
+
+.project-info h3 {
+  margin:0;
+  font-size:18px;
+}
+
+.project-info p {
+  font-size:14px;
 }
 
 /* CONTACT */
 .contact {
-  background:black;
+  background:#111;
   color:white;
-  padding:60px;
+  text-align:center;
+  padding:80px 20px;
+}
+
+.contact p {
+  color:#aaa;
 }
 
 /* MOBILE */
 @media(max-width:768px){
 
-  .section {
-    padding:50px 20px;
+  .grid {
+    grid-template-columns:1fr;
+    gap:30px;
   }
 
-  .project img,
-  .project h3,
-  .project p {
-    max-width:100%;
+  .project img {
+    height:260px;
+  }
+
+  .section {
+    padding:80px 20px;
   }
 
 }
@@ -142,108 +171,78 @@ html.is-leaving #swup {
 
 <body>
 
-<div id="swup">
+<!-- HERO -->
+<div class="hero">
+  <img src="render-clinica.jpg">
 
-  <!-- HERO -->
-  <div class="hero">
-    <img src="render-clinica.jpg">
+  <div class="overlay">
+    <div class="hero-content">
+      <h1>
+        We create images that define how architecture is perceived.
+      </h1>
 
-    <div class="overlay">
-      <div class="hero-content">
-        <h1 class="reveal">
-          We create images that help sell architecture before it's built.
-        </h1>
+      <p>
+        Photorealistic visualization for architects and developers.
+      </p>
 
-        <p class="reveal">
-          Photorealistic 3D visualization for architects and real estate.
-        </p>
-      </div>
+      <a href="https://wa.me/SEUNUMERO" class="cta">
+        Request a Quote
+      </a>
     </div>
   </div>
-
-  <!-- WORK -->
-  <div class="section">
-    <div class="container">
-
-      <h2 class="reveal">Selected Work</h2>
-
-      <div class="grid">
-
-        <div class="project reveal">
-          <a href="projeto-casa.html">
-            <img src="render-casa.jpg">
-          </a>
-          <h3>Modern House</h3>
-          <p>Residential visualization focused on light and realism.</p>
-        </div>
-
-        <div class="project reveal">
-          <a href="projeto-clinica.html">
-            <img src="render-clinica.jpg">
-          </a>
-          <h3>Medical Clinic</h3>
-          <p>Clean commercial space designed to attract clients.</p>
-        </div>
-
-        <div class="project reveal">
-          <a href="projeto-quarto.html">
-            <img src="render-quarto.jpg">
-          </a>
-          <h3>Interior Bedroom</h3>
-          <p>Interior scene focused on comfort and lighting.</p>
-        </div>
-
-        <div class="project reveal">
-          <a href="projeto-recepcao.html">
-            <img src="render-recepcao.jpg">
-          </a>
-          <h3>Reception Area</h3>
-          <p>Designed to create a strong first impression.</p>
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-
-  <!-- CONTACT -->
-  <div class="contact reveal">
-    <h2>Contact</h2>
-    <p>visualize.studio.7@gmail.com</p>
-    <p>@_visualize.studio_</p>
-  </div>
-
 </div>
 
-<!-- SWUP -->
-<script src="https://unpkg.com/swup@4"></script>
+<!-- WORK -->
+<div class="section">
+  <div class="container">
 
-<script>
-const swup = new Swup();
+    <h2>Selected Work</h2>
 
-/* 🔥 FUNÇÃO CORRIGIDA */
-function initAnimations(){
-  const els = document.querySelectorAll('.reveal');
+    <div class="grid">
 
-  const obs = new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        entry.target.classList.add('show');
-      }
-    });
-  });
+      <a href="projeto-casa.html" class="project">
+        <img src="render-casa.jpg">
+        <div class="project-info">
+          <h3>Modern House</h3>
+          <p>Residential visualization</p>
+        </div>
+      </a>
 
-  els.forEach(el=>obs.observe(el));
-}
+      <a href="projeto-clinica.html" class="project">
+        <img src="render-clinica.jpg">
+        <div class="project-info">
+          <h3>Medical Clinic</h3>
+          <p>Commercial project</p>
+        </div>
+      </a>
 
-/* roda na primeira carga */
-initAnimations();
+      <a href="projeto-quarto.html" class="project">
+        <img src="render-quarto.jpg">
+        <div class="project-info">
+          <h3>Interior Bedroom</h3>
+          <p>Interior visualization</p>
+        </div>
+      </a>
 
-/* 🔥 roda após troca de página */
-swup.hooks.on('page:view', () => {
-  initAnimations();
-});
-</script>
+      <a href="projeto-recepcao.html" class="project">
+        <img src="render-recepcao.jpg">
+        <div class="project-info">
+          <h3>Reception Area</h3>
+          <p>Corporate space</p>
+        </div>
+      </a>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact">
+  <h2>Contact</h2>
+  <p>visualize.studio.7@gmail.com</p>
+  <p>@_visualize.studio_</p>
+</div>
 
 </body>
 </html>
