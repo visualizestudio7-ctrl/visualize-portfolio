@@ -5,7 +5,7 @@
 <title>Modern House | Visualize Studio</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 body {
@@ -17,13 +17,13 @@ body {
 /* TIPOGRAFIA */
 h1 {
   font-family:'Playfair Display', serif;
-  font-size:clamp(32px,5vw,48px);
+  font-size:clamp(32px,5vw,56px);
+  margin-bottom:20px;
 }
 
 p {
   color:#666;
-  line-height:1.6;
-  max-width:700px;
+  max-width:600px;
 }
 
 /* TRANSIÇÃO */
@@ -64,62 +64,74 @@ html.is-leaving #swup {
   object-fit:cover;
 }
 
-/* CONTAINER */
-.container {
-  max-width:1000px;
-  margin:auto;
-  padding:80px 20px;
+/* MESMO PADRÃO DA HOME */
+.section {
+  padding:80px;
 }
 
-/* BACK */
+.container {
+  max-width:1100px;
+  margin:auto;
+}
+
+/* BACK (AGORA CORRETO) */
 .back {
   display:inline-block;
   margin-bottom:30px;
-  text-decoration:none;
   color:black;
+  text-decoration:none;
   font-weight:500;
+}
+
+.back:visited,
+.back:active {
+  color:black;
+  text-decoration:none;
 }
 
 .back:hover {
   opacity:0.6;
 }
 
-/* GALERIA */
-.gallery {
+/* GRID IGUAL À HOME */
+.grid {
   display:grid;
-  grid-template-columns:repeat(2, 1fr);
+  grid-template-columns:repeat(auto-fit, minmax(300px,1fr));
   gap:30px;
-  margin-top:50px;
 }
 
-.gallery img {
+/* IMAGENS IGUAIS À HOME */
+.project img {
   width:100%;
-  height:auto;
+  max-width:420px;
+  margin:0 auto;
   display:block;
-  border-radius:6px;
-  object-fit:contain;
-  background:#eee;
-  transition:0.4s;
+  transition:0.6s;
 }
 
-.gallery img:hover {
-  transform:scale(1.02);
+.project img:hover {
+  transform:scale(1.05);
+}
+
+/* CENTRALIZA TEXTO COMO NA HOME */
+.project h3,
+.project p {
+  max-width:420px;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 /* MOBILE */
 @media(max-width:768px){
 
-  .container {
-    padding:40px 16px; /* 👈 espaçamento lateral corrigido */
+  .section {
+    padding:50px 20px;
   }
 
-  .gallery {
-    grid-template-columns:1fr;
-    gap:20px; /* 👈 espaço entre imagens */
-  }
-
-  .gallery img {
-    border-radius:8px;
+  .project img,
+  .project h3,
+  .project p {
+    max-width:100%;
   }
 
 }
@@ -136,24 +148,39 @@ html.is-leaving #swup {
   </div>
 
   <!-- CONTEÚDO -->
-  <div class="container">
+  <div class="section">
+    <div class="container">
 
-    <a href="index.html" class="back">← Back to Home</a>
+      <a href="index.html" class="back">← Back to Home</a>
 
-    <h1 class="reveal">Modern House</h1>
+      <h1 class="reveal">Modern House</h1>
 
-    <p class="reveal">
-      High-end residential visualization focused on light, materials and atmosphere.
-      The goal was to create a realistic and emotionally engaging architectural presentation.
-    </p>
+      <p class="reveal">
+        High-end residential visualization focused on light, materials and atmosphere.
+      </p>
 
-    <div class="gallery">
-      <img src="render-casa.jpg" class="reveal">
-      <img src="render-casa.jpg" class="reveal">
-      <img src="render-casa.jpg" class="reveal">
-      <img src="render-casa.jpg" class="reveal">
+      <!-- GRID DE IMAGENS -->
+      <div class="grid">
+
+        <div class="project reveal">
+          <img src="render-casa.jpg">
+        </div>
+
+        <div class="project reveal">
+          <img src="render-casa.jpg">
+        </div>
+
+        <div class="project reveal">
+          <img src="render-casa.jpg">
+        </div>
+
+        <div class="project reveal">
+          <img src="render-casa.jpg">
+        </div>
+
+      </div>
+
     </div>
-
   </div>
 
 </div>
