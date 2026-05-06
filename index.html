@@ -9,10 +9,10 @@
 
 <style>
 
-/* REMOVE LINK AZUL */
-a, a:link, a:visited, a:hover, a:active {
+/* 🔥 RESET CONTROLADO (SEM QUEBRAR BOTÃO) */
+a {
   text-decoration: none !important;
-  color: inherit !important;
+  color: inherit;
 }
 
 /* BASE */
@@ -110,8 +110,12 @@ p {
   color:rgba(255,255,255,0.85);
 }
 
-/* CTA */
-.cta {
+/* 🔥 BOTÃO 100% CORRIGIDO */
+.cta,
+.cta:link,
+.cta:visited,
+.cta:hover,
+.cta:active {
   display:inline-block;
   margin-top:30px;
   padding:14px 28px;
@@ -119,8 +123,8 @@ p {
   color:#111 !important;
   font-size:14px;
   letter-spacing:0.5px;
-  transition:0.3s;
   border-radius:2px;
+  transition:0.3s;
 }
 
 .cta:hover {
@@ -204,7 +208,6 @@ p {
 .contact p {
   color:#aaa;
   font-size:16px;
-  letter-spacing:0.3px;
 }
 
 /* ANIMAÇÃO APPLE */
@@ -267,7 +270,8 @@ p {
         Photorealistic visualization for architects and developers.
       </p>
 
-      <a href="#" class="cta reveal">
+      <!-- 🔥 BOTÃO COM FORÇA EXTRA -->
+      <a href="#" class="cta reveal" style="color:#111;">
         Request a Quote
       </a>
     </div>
@@ -336,7 +340,6 @@ p {
 /* LOADER */
 window.addEventListener('load', () => {
   const loader = document.getElementById('loader');
-
   setTimeout(() => {
     loader.classList.add('hide');
   }, 500);
@@ -344,22 +347,16 @@ window.addEventListener('load', () => {
 
 /* ANIMAÇÃO */
 function initAnimations(){
-
   const elements = document.querySelectorAll('.reveal');
 
   const observer = new IntersectionObserver((entries)=>{
     entries.forEach(entry=>{
       if(entry.isIntersecting){
-
         const el = entry.target;
         const index = [...elements].indexOf(el);
-
         const delay = Math.pow(index, 0.9) * 0.08;
-
         el.style.transitionDelay = delay + "s";
-
         el.classList.add('show');
-
         observer.unobserve(el);
       }
     });
@@ -378,7 +375,6 @@ window.addEventListener('scroll', () => {
 
 /* MOUSE EFFECT */
 document.querySelectorAll('.project').forEach(card => {
-
   card.addEventListener('mousemove', (e)=>{
     const rect = card.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
@@ -391,7 +387,6 @@ document.querySelectorAll('.project').forEach(card => {
   card.addEventListener('mouseleave', ()=>{
     card.querySelector('img').style.transform = "scale(1)";
   });
-
 });
 
 </script>
