@@ -5,26 +5,27 @@
 <title>Modern House | Visualize Studio</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter&display=swap" rel="stylesheet">
 
 <style>
-body { margin:0; font-family:'Inter', sans-serif; background:#f2f2f2; }
+body { margin:0; font-family:'Inter'; background:#f2f2f2; }
 
-h1 { font-family:'Playfair Display', serif; font-size:48px; }
+h1 { font-family:'Playfair Display'; font-size:clamp(32px,5vw,48px); }
 p { color:#666; line-height:1.6; max-width:700px; }
 
-/* ANIMAÇÃO */
-.reveal { opacity:0; transform:translateY(60px); transition:1.2s cubic-bezier(0.22,1,0.36,1); }
+#swup { transition:0.6s cubic-bezier(0.22,1,0.36,1); }
+
+html.is-animating #swup { opacity:0; transform:translateY(20px); }
+html.is-leaving #swup { opacity:0; transform:scale(0.98); }
+
+.reveal { opacity:0; transform:translateY(60px); transition:1.2s; }
 .reveal.show { opacity:1; transform:translateY(0); }
 
-/* HERO */
 .hero { height:60vh; }
 .hero img { width:100%; height:100%; object-fit:cover; }
 
-/* CONTAINER */
 .container { max-width:1100px; margin:auto; padding:80px 20px; }
 
-/* GALERIA */
 .gallery {
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(400px,1fr));
@@ -38,26 +39,27 @@ border-radius:6px;
 transition:0.5s;
 }
 
-.gallery img:hover { transform:scale(1.03); }
+.gallery img:hover { transform:scale(1.05); }
 
-/* BACK */
-.back {
-display:inline-block;
-margin-bottom:30px;
-text-decoration:none;
-color:black;
-font-weight:500;
+.back { display:inline-block; margin-bottom:30px; text-decoration:none; color:black; }
+
+@media(max-width:768px){
+.container{padding:50px 20px;}
+.gallery{grid-template-columns:1fr;}
 }
 </style>
 </head>
 
 <body>
 
+<div id="swup">
+
 <div class="hero">
 <img src="render-casa.jpg">
 </div>
 
 <div class="container">
+
 <a href="index.html" class="back">← Back to Home</a>
 
 <h1 class="reveal">Modern House</h1>
@@ -71,14 +73,28 @@ High-end residential visualization focused on light, materials and atmosphere.
 <img src="render-casa.jpg" class="reveal">
 <img src="render-casa.jpg" class="reveal">
 </div>
+
+</div>
 </div>
 
+<script src="https://unpkg.com/swup@4"></script>
+
 <script>
+const swup = new Swup();
+
+function initAnimations(){
 const els=document.querySelectorAll('.reveal');
 const obs=new IntersectionObserver(e=>{
-e.forEach(i=>{if(i.isIntersecting)i.target.classList.add('show')});
+e.forEach(i=>{ if(i.isIntersecting) i.target.classList.add('show'); });
 });
 els.forEach(el=>obs.observe(el));
+}
+
+initAnimations();
+
+swup.hooks.on('page:view', () => {
+initAnimations();
+});
 </script>
 
 </body>
