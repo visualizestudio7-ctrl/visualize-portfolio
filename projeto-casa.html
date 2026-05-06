@@ -64,74 +64,63 @@ html.is-leaving #swup {
   object-fit:cover;
 }
 
-/* MESMO PADRÃO DA HOME */
+/* SEÇÃO */
 .section {
-  padding:80px;
+  padding:80px 20px;
 }
 
 .container {
-  max-width:1100px;
+  max-width:900px;
   margin:auto;
 }
 
-/* BACK (AGORA CORRETO) */
-.back {
-  display:inline-block;
-  margin-bottom:30px;
-  color:black;
-  text-decoration:none;
-  font-weight:500;
-}
-
+/* 🔥 BACK TOTALMENTE CORRIGIDO */
+.back,
+.back:link,
 .back:visited,
 .back:active {
-  color:black;
-  text-decoration:none;
+  display:inline-block;
+  margin-bottom:30px;
+  color:black !important;
+  text-decoration:none !important;
+  font-weight:500;
 }
 
 .back:hover {
   opacity:0.6;
 }
 
-/* GRID IGUAL À HOME */
+/* GRID */
 .grid {
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(300px,1fr));
-  gap:30px;
+  grid-template-columns:repeat(2, 1fr);
+  gap:24px;
+  margin-top:40px;
 }
 
-/* IMAGENS IGUAIS À HOME */
+/* IMAGENS */
 .project img {
   width:100%;
-  max-width:420px;
-  margin:0 auto;
+  height:auto;
   display:block;
-  transition:0.6s;
+  border-radius:6px;
+  transition:0.4s ease;
 }
 
 .project img:hover {
-  transform:scale(1.05);
-}
-
-/* CENTRALIZA TEXTO COMO NA HOME */
-.project h3,
-.project p {
-  max-width:420px;
-  margin-left:auto;
-  margin-right:auto;
+  transform:scale(1.03);
 }
 
 /* MOBILE */
 @media(max-width:768px){
 
   .section {
-    padding:50px 20px;
+    padding:50px 16px;
   }
 
-  .project img,
-  .project h3,
-  .project p {
-    max-width:100%;
+  .grid {
+    grid-template-columns:1fr;
+    gap:20px;
   }
 
 }
@@ -159,7 +148,6 @@ html.is-leaving #swup {
         High-end residential visualization focused on light, materials and atmosphere.
       </p>
 
-      <!-- GRID DE IMAGENS -->
       <div class="grid">
 
         <div class="project reveal">
