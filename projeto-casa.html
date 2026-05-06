@@ -8,6 +8,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
+
+/* 🔥 RESET GLOBAL (resolve o problema do link azul) */
+a {
+  all: unset;
+  cursor: pointer;
+}
+
+/* BASE */
 body {
   margin:0;
   font-family:'Inter', sans-serif;
@@ -74,20 +82,12 @@ html.is-leaving #swup {
   margin:auto;
 }
 
-/* 🔥 BACK TOTALMENTE CORRIGIDO */
-.back,
-.back:link,
-.back:visited,
-.back:active {
+/* BACK */
+.back {
   display:inline-block;
   margin-bottom:30px;
-  color:black !important;
-  text-decoration:none !important;
+  color:black;
   font-weight:500;
-}
-
-.back:hover {
-  opacity:0.6;
 }
 
 /* GRID */
@@ -124,6 +124,7 @@ html.is-leaving #swup {
   }
 
 }
+
 </style>
 </head>
 
