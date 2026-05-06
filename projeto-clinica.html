@@ -56,6 +56,7 @@ html.is-leaving #swup {
 /* HERO */
 .hero {
   height:60vh;
+  position:relative;
 }
 
 .hero img {
@@ -121,6 +122,42 @@ html.is-leaving #swup {
   }
 
 }
+
+/* LANG */
+.lang-switch {
+  position:absolute;
+  top:20px;
+  right:20px;
+  display:flex;
+  gap:8px;
+}
+
+.lang-switch button {
+  background:rgba(0,0,0,0.5);
+  border:none;
+  color:white;
+  padding:6px 10px;
+  cursor:pointer;
+  font-size:12px;
+}
+
+/* WPP */
+.wpp-btn {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25D366;
+  color:white;
+  padding:12px 18px;
+  border-radius:50px;
+  font-size:14px;
+  font-weight:500;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.2);
+  z-index:999;
+}
 </style>
 </head>
 
@@ -131,6 +168,14 @@ html.is-leaving #swup {
   <!-- HERO -->
   <div class="hero">
     <img src="render-clinica.jpg">
+
+    <!-- LANG -->
+    <div class="lang-switch">
+      <button onclick="setLang('en')">EN</button>
+      <button onclick="setLang('pt')">PT</button>
+      <button onclick="setLang('es')">ES</button>
+    </div>
+
   </div>
 
   <!-- CONTEÚDO -->
@@ -141,10 +186,16 @@ html.is-leaving #swup {
         ← Back to Home
       </a>
 
-      <h1 class="reveal">Medical Clinic</h1>
+      <h1 class="reveal"
+        data-en="Medical Clinic"
+        data-pt="Clínica Médica"
+        data-es="Clínica Médica">
+      </h1>
 
-      <p class="reveal">
-        Commercial healthcare visualization designed to communicate clarity, trust and modern architectural identity.
+      <p class="reveal"
+        data-en="Commercial healthcare visualization designed to communicate clarity, trust and modern architectural identity."
+        data-pt="Visualização de clínica médica focada em transmitir clareza, confiança e identidade arquitetônica moderna."
+        data-es="Visualización de clínica médica diseñada para transmitir claridad, confianza e identidad arquitectónica moderna.">
       </p>
 
       <div class="grid">
@@ -172,6 +223,11 @@ html.is-leaving #swup {
 
 </div>
 
+<!-- WPP -->
+<a href="https://wa.me/5599999999999" class="wpp-btn" target="_blank">
+  💬 Faça seu orçamento
+</a>
+
 <!-- SWUP -->
 <script src="https://unpkg.com/swup@4"></script>
 
@@ -196,6 +252,20 @@ initAnimations();
 
 swup.hooks.on('page:view', () => {
   initAnimations();
+});
+
+/* LANG */
+function setLang(lang){
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const text = el.getAttribute(`data-${lang}`);
+    if(text) el.textContent = text;
+  });
+  localStorage.setItem('lang', lang);
+}
+
+window.addEventListener('load', () => {
+  const saved = localStorage.getItem('lang') || 'en';
+  setLang(saved);
 });
 </script>
 
