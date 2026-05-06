@@ -1,192 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Visualize Studio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Visualize Studio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- FONTS -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: #f2f2f2;
-      overflow-x: hidden;
-    }
+<style>
+body {
+  margin:0;
+  font-family:'Inter', sans-serif;
+  background:#f2f2f2;
+  overflow-x:hidden;
+}
 
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(32px, 5vw, 56px);
-      line-height: 1.1;
-      letter-spacing: -1px;
-    }
+h1 {
+  font-family:'Playfair Display', serif;
+  font-size:clamp(32px,5vw,56px);
+  line-height:1.1;
+}
 
-    h2 { font-size: 32px; }
-    h3 { margin: 10px 0 5px; }
+h2 { font-size:32px; }
+p { color:#666; }
 
-    p { color: #666; }
+/* TRANSIÇÃO */
+#swup {
+  transition:0.6s cubic-bezier(0.22,1,0.36,1);
+}
 
-    /* TRANSIÇÃO SWUP */
-    #swup {
-      transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-    }
+html.is-animating #swup {
+  opacity:0;
+  transform:translateY(20px);
+}
 
-    html.is-animating #swup {
-      opacity: 0;
-      transform: translateY(20px);
-    }
+html.is-leaving #swup {
+  opacity:0;
+  transform:scale(0.98);
+}
 
-    html.is-leaving #swup {
-      opacity: 0;
-      transform: scale(0.98);
-    }
+/* ANIMAÇÃO */
+.reveal {
+  opacity:0;
+  transform:translateY(60px);
+  transition:1.2s cubic-bezier(0.22,1,0.36,1);
+}
 
-    /* ANIMAÇÃO INTERNA */
-    .reveal {
-      opacity: 0;
-      transform: translateY(60px);
-      transition: 1.2s cubic-bezier(0.22,1,0.36,1);
-    }
+.reveal.show {
+  opacity:1;
+  transform:translateY(0);
+}
 
-    .reveal.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
+/* HERO */
+.hero {
+  position:relative;
+  height:100vh;
+}
 
-    .delay-1 { transition-delay: 0.2s; }
-    .delay-2 { transition-delay: 0.4s; }
+.hero img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
 
-    /* HERO */
-    .hero {
-      position: relative;
-      height: 100vh;
-      overflow: hidden;
-    }
+.overlay {
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.5);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:40px;
+  color:white;
+}
 
-    .hero img {
-      width: 100%;
-      height: 110%;
-      object-fit: cover;
-    }
+.hero-content {
+  max-width:700px;
+}
 
-    .overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.65), rgba(0,0,0,0.4));
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-      padding:40px;
-      color:white;
-    }
+/* SEÇÕES */
+.section {
+  padding:80px;
+}
 
-    .hero-content {
-      max-width: 800px;
-    }
+.container {
+  max-width:1100px;
+  margin:auto;
+}
 
-    .hero p {
-      color: #eee;
-      font-size: 18px;
-    }
+/* GRID */
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:30px;
+}
 
-    .cta {
-      margin-top: 25px;
-      display:inline-block;
-      background:white;
-      color:black;
-      padding:14px 28px;
-      text-decoration:none;
-      transition:0.3s;
-    }
+/* PROJETOS */
+.project img {
+  width:100%;
+  max-width:420px;
+  margin:0 auto;
+  display:block;
+  transition:0.5s;
+}
 
-    .cta:hover {
-      background:#ddd;
-    }
+.project img:hover {
+  transform:scale(1.05);
+}
 
-    /* SECTION */
-    .section {
-      padding:80px;
-    }
+.project h3,
+.project p {
+  max-width:420px;
+  margin-left:auto;
+  margin-right:auto;
+}
 
-    /* GRID */
-    .grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-      gap:30px;
-    }
+/* CONTACT */
+.contact {
+  background:black;
+  color:white;
+  padding:60px;
+}
 
-    .project {
-      overflow:hidden;
-      text-align:left;
-    }
+/* MOBILE */
+@media(max-width:768px){
 
-    .project img {
-      width:100%;
-      max-width:420px;
-      margin:0 auto;
-      display:block;
-      cursor:pointer;
-      transition:0.6s;
-    }
+  .section {
+    padding:50px 20px;
+  }
 
-    .project:hover img {
-      transform:scale(1.05);
-      filter:brightness(0.9);
-    }
+  .project img,
+  .project h3,
+  .project p {
+    max-width:100%;
+  }
 
-    .project p {
-      font-size:14px;
-      max-width:420px;
-      margin: 0 auto;
-    }
-
-    .project h3 {
-      max-width:420px;
-      margin:10px auto 5px;
-    }
-
-    /* CONTACT */
-    .contact {
-      background:black;
-      color:white;
-      padding:60px;
-    }
-
-    /* WHATS */
-    .whatsapp {
-      position:fixed;
-      bottom:20px;
-      right:20px;
-      background:black;
-      color:white;
-      padding:12px 18px;
-      border-radius:50px;
-      text-decoration:none;
-      border:1px solid white;
-    }
-
-    /* MOBILE */
-    @media (max-width:768px){
-
-      .overlay { padding:20px; }
-
-      .section { padding:50px 20px; }
-
-      .hero p { font-size:16px; }
-
-      .grid { gap:20px; }
-
-      .project img,
-      .project p,
-      .project h3 {
-        max-width:100%;
-      }
-    }
-
-  </style>
+}
+</style>
 </head>
 
 <body>
@@ -203,60 +154,60 @@
           We create images that help sell architecture before it's built.
         </h1>
 
-        <p class="reveal delay-1">
+        <p class="reveal">
           Photorealistic 3D visualization for architects and real estate.
         </p>
-
-        <a href="https://wa.me/SEUNUMERO" class="cta reveal delay-2">
-          Request a Quote
-        </a>
       </div>
     </div>
   </div>
 
   <!-- WORK -->
   <div class="section">
-    <h2 class="reveal">Selected Work</h2>
+    <div class="container">
 
-    <div class="grid">
+      <h2 class="reveal">Selected Work</h2>
 
-      <div class="project reveal">
-        <a href="projeto-casa.html">
-          <img src="render-casa.jpg">
-        </a>
-        <h3>Modern House</h3>
-        <p>Residential visualization focused on light and realism.</p>
-      </div>
+      <div class="grid">
 
-      <div class="project reveal">
-        <a href="projeto-clinica.html">
-          <img src="render-clinica.jpg">
-        </a>
-        <h3>Medical Clinic</h3>
-        <p>Clean commercial space designed to attract clients.</p>
-      </div>
+        <div class="project reveal">
+          <a href="projeto-casa.html">
+            <img src="render-casa.jpg">
+          </a>
+          <h3>Modern House</h3>
+          <p>Residential visualization focused on light and realism.</p>
+        </div>
 
-      <div class="project reveal">
-        <a href="projeto-quarto.html">
-          <img src="render-quarto.jpg">
-        </a>
-        <h3>Interior Bedroom</h3>
-        <p>Interior scene focused on comfort and lighting.</p>
-      </div>
+        <div class="project reveal">
+          <a href="projeto-clinica.html">
+            <img src="render-clinica.jpg">
+          </a>
+          <h3>Medical Clinic</h3>
+          <p>Clean commercial space designed to attract clients.</p>
+        </div>
 
-      <div class="project reveal">
-        <a href="projeto-recepcao.html">
-          <img src="render-recepcao.jpg">
-        </a>
-        <h3>Reception Area</h3>
-        <p>Designed to create a strong first impression.</p>
+        <div class="project reveal">
+          <a href="projeto-quarto.html">
+            <img src="render-quarto.jpg">
+          </a>
+          <h3>Interior Bedroom</h3>
+          <p>Interior scene focused on comfort and lighting.</p>
+        </div>
+
+        <div class="project reveal">
+          <a href="projeto-recepcao.html">
+            <img src="render-recepcao.jpg">
+          </a>
+          <h3>Reception Area</h3>
+          <p>Designed to create a strong first impression.</p>
+        </div>
+
       </div>
 
     </div>
   </div>
 
   <!-- CONTACT -->
-  <div class="contact">
+  <div class="contact reveal">
     <h2>Contact</h2>
     <p>visualize.studio.7@gmail.com</p>
     <p>@_visualize.studio_</p>
@@ -264,26 +215,31 @@
 
 </div>
 
-<a href="https://wa.me/SEUNUMERO" class="whatsapp">WhatsApp</a>
-
 <!-- SWUP -->
 <script src="https://unpkg.com/swup@4"></script>
 
 <script>
 const swup = new Swup();
 
+/* 🔥 FUNÇÃO CORRIGIDA */
 function initAnimations(){
-  const els=document.querySelectorAll('.reveal');
-  const obs=new IntersectionObserver(e=>{
-    e.forEach(i=>{
-      if(i.isIntersecting) i.target.classList.add('show');
+  const els = document.querySelectorAll('.reveal');
+
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('show');
+      }
     });
   });
+
   els.forEach(el=>obs.observe(el));
 }
 
+/* roda na primeira carga */
 initAnimations();
 
+/* 🔥 roda após troca de página */
 swup.hooks.on('page:view', () => {
   initAnimations();
 });
