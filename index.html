@@ -8,11 +8,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
+
+/* 🔥 REMOVE QUALQUER LINK AZUL */
+a, a:link, a:visited, a:hover, a:active {
+  text-decoration: none !important;
+  color: inherit !important;
+}
+
+/* BASE */
 body {
   margin:0;
   font-family:'Inter', sans-serif;
   background:#f2f2f2;
   color:#111;
+  overflow-x:hidden;
 }
 
 /* TIPOGRAFIA */
@@ -20,7 +29,6 @@ h1 {
   font-family:'Playfair Display', serif;
   font-size:clamp(36px,6vw,72px);
   line-height:1.05;
-  letter-spacing:-1px;
 }
 
 h2 {
@@ -36,12 +44,18 @@ p {
 .hero {
   height:100vh;
   position:relative;
+  overflow:hidden;
 }
 
 .hero img {
   width:100%;
   height:100%;
   object-fit:cover;
+}
+
+/* PARALLAX */
+.hero.parallax img {
+  transform: translateY(var(--scroll,0)) scale(1.05);
 }
 
 .overlay {
@@ -63,7 +77,7 @@ p {
 .hero p {
   margin-top:20px;
   font-size:18px;
-  color:rgba(255,255,255,0.8);
+  color:rgba(255,255,255,0.85);
 }
 
 /* CTA */
@@ -73,7 +87,6 @@ p {
   padding:14px 28px;
   background:white;
   color:black;
-  text-decoration:none;
   font-size:14px;
   letter-spacing:0.5px;
   transition:0.3s;
@@ -100,7 +113,7 @@ p {
   gap:40px;
 }
 
-/* PROJETO */
+/* PROJETOS */
 .project {
   position:relative;
   overflow:hidden;
@@ -116,21 +129,33 @@ p {
   width:100%;
   height:420px;
   object-fit:cover;
-  transition:0.6s ease;
+  transition:transform 0.6s ease;
 }
 
 .project:hover img {
   transform:scale(1.05);
 }
 
-/* OVERLAY TEXTO */
+/* OVERLAY */
+.project::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.15);
+  opacity:0;
+  transition:0.4s;
+}
+
+.project:hover::after {
+  opacity:1;
+}
+
 .project-info {
   margin-top:15px;
 }
 
 .project-info h3 {
   margin:0;
-  font-size:18px;
 }
 
 .project-info p {
@@ -142,11 +167,31 @@ p {
   background:#111;
   color:white;
   text-align:center;
-  padding:80px 20px;
+  padding:100px 20px;
 }
 
 .contact p {
   color:#aaa;
+  font-size:16px;
+  letter-spacing:0.3px;
+}
+
+/* 🔥 ANIMAÇÃO APPLE REAL */
+.reveal {
+  opacity:0;
+  transform:translateY(50px) scale(0.98);
+  filter:blur(10px);
+
+  transition:
+    opacity 1s cubic-bezier(0.22,1,0.36,1),
+    transform 1s cubic-bezier(0.22,1,0.36,1),
+    filter 1.2s cubic-bezier(0.22,1,0.36,1);
+}
+
+.reveal.show {
+  opacity:1;
+  transform:translateY(0) scale(1);
+  filter:blur(0);
 }
 
 /* MOBILE */
@@ -166,26 +211,27 @@ p {
   }
 
 }
+
 </style>
 </head>
 
 <body>
 
 <!-- HERO -->
-<div class="hero">
+<div class="hero parallax">
   <img src="render-clinica.jpg">
 
   <div class="overlay">
     <div class="hero-content">
-      <h1>
+      <h1 class="reveal">
         We create images that define how architecture is perceived.
       </h1>
 
-      <p>
+      <p class="reveal">
         Photorealistic visualization for architects and developers.
       </p>
 
-      <a href="https://wa.me/SEUNUMERO" class="cta">
+      <a href="#" class="cta reveal">
         Request a Quote
       </a>
     </div>
@@ -196,11 +242,11 @@ p {
 <div class="section">
   <div class="container">
 
-    <h2>Selected Work</h2>
+    <h2 class="reveal">Selected Work</h2>
 
     <div class="grid">
 
-      <a href="projeto-casa.html" class="project">
+      <a href="projeto-casa.html" class="project reveal">
         <img src="render-casa.jpg">
         <div class="project-info">
           <h3>Modern House</h3>
@@ -208,7 +254,7 @@ p {
         </div>
       </a>
 
-      <a href="projeto-clinica.html" class="project">
+      <a href="projeto-clinica.html" class="project reveal">
         <img src="render-clinica.jpg">
         <div class="project-info">
           <h3>Medical Clinic</h3>
@@ -216,7 +262,7 @@ p {
         </div>
       </a>
 
-      <a href="projeto-quarto.html" class="project">
+      <a href="projeto-quarto.html" class="project reveal">
         <img src="render-quarto.jpg">
         <div class="project-info">
           <h3>Interior Bedroom</h3>
@@ -224,7 +270,7 @@ p {
         </div>
       </a>
 
-      <a href="projeto-recepcao.html" class="project">
+      <a href="projeto-recepcao.html" class="project reveal">
         <img src="render-recepcao.jpg">
         <div class="project-info">
           <h3>Reception Area</h3>
@@ -237,12 +283,73 @@ p {
   </div>
 </div>
 
-<!-- CONTACT -->
+<!-- CONTACT (🔥 AGORA COM ANIMAÇÃO SEPARADA) -->
 <div class="contact">
-  <h2>Contact</h2>
-  <p>visualize.studio.7@gmail.com</p>
-  <p>@_visualize.studio_</p>
+
+  <h2 class="reveal">Contact</h2>
+
+  <p class="reveal">visualize.studio.7@gmail.com</p>
+
+  <p class="reveal">@_visualize.studio_</p>
+
 </div>
+
+<!-- JS -->
+<script>
+
+/* 🔥 ANIMAÇÃO COM DELAY INTELIGENTE */
+function initAnimations(){
+
+  const elements = document.querySelectorAll('.reveal');
+
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+
+        const el = entry.target;
+        const index = [...elements].indexOf(el);
+
+        const delay = Math.pow(index, 0.9) * 0.08;
+
+        el.style.transitionDelay = delay + "s";
+
+        el.classList.add('show');
+
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  elements.forEach(el => observer.observe(el));
+}
+
+initAnimations();
+
+/* PARALLAX */
+window.addEventListener('scroll', () => {
+  const scroll = window.scrollY;
+  document.documentElement.style.setProperty('--scroll', scroll * 0.1 + 'px');
+});
+
+/* EFEITO MOUSE */
+document.querySelectorAll('.project').forEach(card => {
+
+  card.addEventListener('mousemove', (e)=>{
+    const rect = card.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+    card.querySelector('img').style.transform =
+      `scale(1.05) translate(${x*10}px, ${y*10}px)`;
+  });
+
+  card.addEventListener('mouseleave', ()=>{
+    card.querySelector('img').style.transform = "scale(1)";
+  });
+
+});
+
+</script>
 
 </body>
 </html>
