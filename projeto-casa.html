@@ -8,44 +8,115 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter&display=swap" rel="stylesheet">
 
 <style>
-body { margin:0; font-family:'Inter'; background:#f2f2f2; }
+body {
+  margin:0;
+  font-family:'Inter', sans-serif;
+  background:#f2f2f2;
+}
 
-h1 { font-family:'Playfair Display'; font-size:clamp(32px,5vw,48px); }
-p { color:#666; line-height:1.6; max-width:700px; }
+/* TIPOGRAFIA */
+h1 {
+  font-family:'Playfair Display', serif;
+  font-size:clamp(32px,5vw,48px);
+}
 
-#swup { transition:0.6s cubic-bezier(0.22,1,0.36,1); }
+p {
+  color:#666;
+  line-height:1.6;
+  max-width:700px;
+}
 
-html.is-animating #swup { opacity:0; transform:translateY(20px); }
-html.is-leaving #swup { opacity:0; transform:scale(0.98); }
+/* TRANSIÇÃO */
+#swup {
+  transition:0.6s cubic-bezier(0.22,1,0.36,1);
+}
 
-.reveal { opacity:0; transform:translateY(60px); transition:1.2s; }
-.reveal.show { opacity:1; transform:translateY(0); }
+html.is-animating #swup {
+  opacity:0;
+  transform:translateY(20px);
+}
 
-.hero { height:60vh; }
-.hero img { width:100%; height:100%; object-fit:cover; }
+html.is-leaving #swup {
+  opacity:0;
+  transform:scale(0.98);
+}
 
-.container { max-width:1100px; margin:auto; padding:80px 20px; }
+/* ANIMAÇÃO */
+.reveal {
+  opacity:0;
+  transform:translateY(60px);
+  transition:1.2s cubic-bezier(0.22,1,0.36,1);
+}
 
+.reveal.show {
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* HERO */
+.hero {
+  height:60vh;
+}
+
+.hero img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* CONTAINER */
+.container {
+  max-width:1100px;
+  margin:auto;
+  padding:80px 20px;
+}
+
+/* BOTÃO BACK (CORRIGIDO) */
+.back {
+  display:inline-block;
+  margin-bottom:30px;
+  text-decoration:none;
+  color:black;
+  font-weight:500;
+}
+
+.back:hover {
+  opacity:0.6;
+}
+
+/* GALERIA AJUSTADA */
 .gallery {
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(400px,1fr));
-gap:30px;
-margin-top:50px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,420px));
+  justify-content:center;
+  gap:30px;
+  margin-top:50px;
 }
 
 .gallery img {
-width:100%;
-border-radius:6px;
-transition:0.5s;
+  width:100%;
+  max-width:420px;
+  margin:0 auto;
+  display:block;
+  border-radius:6px;
+  transition:0.5s;
 }
 
-.gallery img:hover { transform:scale(1.05); }
+.gallery img:hover {
+  transform:scale(1.04);
+}
 
-.back { display:inline-block; margin-bottom:30px; text-decoration:none; color:black; }
-
+/* MOBILE */
 @media(max-width:768px){
-.container{padding:50px 20px;}
-.gallery{grid-template-columns:1fr;}
+  .container { padding:50px 20px; }
+
+  .gallery {
+    grid-template-columns:1fr;
+  }
+
+  .gallery img {
+    max-width:100%;
+  }
 }
 </style>
 </head>
@@ -54,46 +125,55 @@ transition:0.5s;
 
 <div id="swup">
 
-<div class="hero">
-<img src="render-casa.jpg">
+  <!-- HERO -->
+  <div class="hero">
+    <img src="render-casa.jpg">
+  </div>
+
+  <!-- CONTEÚDO -->
+  <div class="container">
+
+    <a href="index.html" class="back">← Back to Home</a>
+
+    <h1 class="reveal">Modern House</h1>
+
+    <p class="reveal">
+      High-end residential visualization focused on light, materials and atmosphere.
+      The goal was to create a realistic and emotionally engaging architectural presentation.
+    </p>
+
+    <div class="gallery">
+      <img src="render-casa.jpg" class="reveal">
+      <img src="render-casa.jpg" class="reveal">
+      <img src="render-casa.jpg" class="reveal">
+    </div>
+
+  </div>
+
 </div>
 
-<div class="container">
-
-<a href="index.html" class="back">← Back to Home</a>
-
-<h1 class="reveal">Modern House</h1>
-
-<p class="reveal">
-High-end residential visualization focused on light, materials and atmosphere.
-</p>
-
-<div class="gallery">
-<img src="render-casa.jpg" class="reveal">
-<img src="render-casa.jpg" class="reveal">
-<img src="render-casa.jpg" class="reveal">
-</div>
-
-</div>
-</div>
-
+<!-- SWUP -->
 <script src="https://unpkg.com/swup@4"></script>
 
 <script>
 const swup = new Swup();
 
 function initAnimations(){
-const els=document.querySelectorAll('.reveal');
-const obs=new IntersectionObserver(e=>{
-e.forEach(i=>{ if(i.isIntersecting) i.target.classList.add('show'); });
-});
-els.forEach(el=>obs.observe(el));
+  const els=document.querySelectorAll('.reveal');
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('show');
+      }
+    });
+  });
+  els.forEach(el=>obs.observe(el));
 }
 
 initAnimations();
 
 swup.hooks.on('page:view', () => {
-initAnimations();
+  initAnimations();
 });
 </script>
 
