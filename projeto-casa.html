@@ -66,12 +66,12 @@ html.is-leaving #swup {
 
 /* CONTAINER */
 .container {
-  max-width:1100px;
+  max-width:1000px;
   margin:auto;
   padding:80px 20px;
 }
 
-/* BOTÃO BACK (CORRIGIDO) */
+/* BACK */
 .back {
   display:inline-block;
   margin-bottom:30px;
@@ -84,39 +84,44 @@ html.is-leaving #swup {
   opacity:0.6;
 }
 
-/* GALERIA AJUSTADA */
+/* GALERIA */
 .gallery {
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,420px));
-  justify-content:center;
+  grid-template-columns:repeat(2, 1fr);
   gap:30px;
   margin-top:50px;
 }
 
 .gallery img {
   width:100%;
-  max-width:420px;
-  margin:0 auto;
+  height:auto;
   display:block;
   border-radius:6px;
-  transition:0.5s;
+  object-fit:contain;
+  background:#eee;
+  transition:0.4s;
 }
 
 .gallery img:hover {
-  transform:scale(1.04);
+  transform:scale(1.02);
 }
 
 /* MOBILE */
 @media(max-width:768px){
-  .container { padding:50px 20px; }
+
+  .container {
+    padding:40px 16px; /* 👈 espaçamento lateral corrigido */
+  }
 
   .gallery {
     grid-template-columns:1fr;
+    gap:20px; /* 👈 espaço entre imagens */
   }
 
   .gallery img {
-    max-width:100%;
+    border-radius:8px;
   }
+
 }
 </style>
 </head>
@@ -143,6 +148,7 @@ html.is-leaving #swup {
     </p>
 
     <div class="gallery">
+      <img src="render-casa.jpg" class="reveal">
       <img src="render-casa.jpg" class="reveal">
       <img src="render-casa.jpg" class="reveal">
       <img src="render-casa.jpg" class="reveal">
