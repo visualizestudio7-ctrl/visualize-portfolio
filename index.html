@@ -246,6 +246,30 @@ p {
 
 }
 
+/* 🔥 LANG SWITCH (ADICIONADO) */
+.lang-switch {
+  position:absolute;
+  top:20px;
+  right:20px;
+  display:flex;
+  gap:8px;
+}
+
+.lang-switch button {
+  background:rgba(255,255,255,0.2);
+  border:none;
+  color:white;
+  padding:6px 10px;
+  cursor:pointer;
+  font-size:12px;
+  backdrop-filter:blur(6px);
+  transition:0.3s;
+}
+
+.lang-switch button:hover {
+  background:rgba(255,255,255,0.4);
+}
+
 </style>
 </head>
 
@@ -261,18 +285,32 @@ p {
   <img src="render-clinica.jpg">
 
   <div class="overlay">
+
+    <!-- LANG -->
+    <div class="lang-switch">
+      <button onclick="setLang('en')">EN</button>
+      <button onclick="setLang('pt')">PT</button>
+      <button onclick="setLang('es')">ES</button>
+    </div>
+
     <div class="hero-content">
-      <h1 class="reveal">
-        We create images that define how architecture is perceived.
+      <h1 class="reveal"
+        data-en="We create images that define how architecture is perceived."
+        data-pt="Criamos imagens que definem como a arquitetura é percebida."
+        data-es="Creamos imágenes que definen cómo se percibe la arquitectura.">
       </h1>
 
-      <p class="reveal">
-        Photorealistic visualization for architects and developers.
+      <p class="reveal"
+        data-en="Photorealistic visualization for architects and developers."
+        data-pt="Visualização 3D fotorrealista para arquitetos e incorporadoras."
+        data-es="Visualización 3D fotorrealista para arquitectos y desarrolladores.">
       </p>
 
-      <!-- 🔥 BOTÃO COM FORÇA EXTRA -->
-      <a href="#" class="cta reveal" style="color:#111;">
-        Request a Quote
+      <a href="#" class="cta reveal"
+        data-en="Request a Quote"
+        data-pt="Solicitar Orçamento"
+        data-es="Solicitar Presupuesto"
+        style="color:#111;">
       </a>
     </div>
   </div>
@@ -282,39 +320,43 @@ p {
 <div class="section">
   <div class="container">
 
-    <h2 class="reveal">Selected Work</h2>
+    <h2 class="reveal"
+      data-en="Selected Work"
+      data-pt="Projetos Selecionados"
+      data-es="Proyectos Seleccionados">
+    </h2>
 
     <div class="grid">
 
       <a href="projeto-casa.html" class="project reveal">
         <img src="render-casa.jpg">
         <div class="project-info">
-          <h3>Modern House</h3>
-          <p>Residential visualization</p>
+          <h3 data-en="Modern House" data-pt="Casa Moderna" data-es="Casa Moderna"></h3>
+          <p data-en="Residential visualization" data-pt="Visualização residencial" data-es="Visualización residencial"></p>
         </div>
       </a>
 
       <a href="projeto-clinica.html" class="project reveal">
         <img src="render-clinica.jpg">
         <div class="project-info">
-          <h3>Medical Clinic</h3>
-          <p>Commercial project</p>
+          <h3 data-en="Medical Clinic" data-pt="Clínica Médica" data-es="Clínica Médica"></h3>
+          <p data-en="Commercial project" data-pt="Projeto comercial" data-es="Proyecto comercial"></p>
         </div>
       </a>
 
       <a href="projeto-quarto.html" class="project reveal">
         <img src="render-quarto.jpg">
         <div class="project-info">
-          <h3>Interior Bedroom</h3>
-          <p>Interior visualization</p>
+          <h3 data-en="Interior Bedroom" data-pt="Quarto" data-es="Dormitorio"></h3>
+          <p data-en="Interior visualization" data-pt="Visualização interna" data-es="Visualización interior"></p>
         </div>
       </a>
 
       <a href="projeto-recepcao.html" class="project reveal">
         <img src="render-recepcao.jpg">
         <div class="project-info">
-          <h3>Reception Area</h3>
-          <p>Corporate space</p>
+          <h3 data-en="Reception Area" data-pt="Recepção" data-es="Recepción"></h3>
+          <p data-en="Corporate space" data-pt="Espaço corporativo" data-es="Espacio corporativo"></p>
         </div>
       </a>
 
@@ -326,10 +368,13 @@ p {
 <!-- CONTACT -->
 <div class="contact">
 
-  <h2 class="reveal">Contact</h2>
+  <h2 class="reveal"
+    data-en="Contact"
+    data-pt="Contato"
+    data-es="Contacto">
+  </h2>
 
   <p class="reveal">visualize.studio.7@gmail.com</p>
-
   <p class="reveal">@_visualize.studio_</p>
 
 </div>
@@ -387,6 +432,20 @@ document.querySelectorAll('.project').forEach(card => {
   card.addEventListener('mouseleave', ()=>{
     card.querySelector('img').style.transform = "scale(1)";
   });
+});
+
+/* 🔥 LANG SCRIPT */
+function setLang(lang){
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const text = el.getAttribute(`data-${lang}`);
+    if(text) el.textContent = text;
+  });
+  localStorage.setItem('lang', lang);
+}
+
+window.addEventListener('load', () => {
+  const saved = localStorage.getItem('lang') || 'en';
+  setLang(saved);
 });
 
 </script>
