@@ -8,14 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-
-/* 🔥 RESET GLOBAL (resolve o problema do link azul) */
-a {
-  all: unset;
-  cursor: pointer;
-}
-
-/* BASE */
 body {
   margin:0;
   font-family:'Inter', sans-serif;
@@ -82,12 +74,17 @@ html.is-leaving #swup {
   margin:auto;
 }
 
-/* BACK */
-.back {
+/* 🔥 BACK CORRIGIDO */
+.back,
+.back:link,
+.back:visited,
+.back:hover,
+.back:active {
+  color:black !important;
+  text-decoration:none !important;
+  font-weight:500;
   display:inline-block;
   margin-bottom:30px;
-  color:black;
-  font-weight:500;
 }
 
 /* GRID */
@@ -124,7 +121,6 @@ html.is-leaving #swup {
   }
 
 }
-
 </style>
 </head>
 
@@ -141,7 +137,10 @@ html.is-leaving #swup {
   <div class="section">
     <div class="container">
 
-      <a href="index.html" class="back">← Back to Home</a>
+      <!-- 🔥 LINK COM FORÇA MÁXIMA -->
+      <a href="index.html" class="back" style="color:black;text-decoration:none;">
+        ← Back to Home
+      </a>
 
       <h1 class="reveal">Modern House</h1>
 
@@ -181,14 +180,16 @@ html.is-leaving #swup {
 const swup = new Swup();
 
 function initAnimations(){
-  const els=document.querySelectorAll('.reveal');
-  const obs=new IntersectionObserver(entries=>{
+  const els = document.querySelectorAll('.reveal');
+
+  const obs = new IntersectionObserver(entries=>{
     entries.forEach(entry=>{
       if(entry.isIntersecting){
         entry.target.classList.add('show');
       }
     });
   });
+
   els.forEach(el=>obs.observe(el));
 }
 
