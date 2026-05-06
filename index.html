@@ -246,7 +246,7 @@ p {
 
 }
 
-/* 🔥 LANG SWITCH (ADICIONADO) */
+/* 🔥 LANG SWITCH */
 .lang-switch {
   position:absolute;
   top:20px;
@@ -270,6 +270,40 @@ p {
   background:rgba(255,255,255,0.4);
 }
 
+/* 🔥 WHATSAPP BUTTON */
+.wpp-btn,
+.wpp-btn:link,
+.wpp-btn:visited,
+.wpp-btn:hover,
+.wpp-btn:active {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+
+  background:#25D366;
+  color:white !important;
+
+  padding:12px 18px;
+  border-radius:50px;
+
+  font-size:14px;
+  font-weight:500;
+
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  box-shadow:0 8px 20px rgba(0,0,0,0.2);
+
+  transition:0.3s;
+  z-index:999;
+}
+
+.wpp-btn:hover {
+  transform:translateY(-2px);
+  box-shadow:0 12px 25px rgba(0,0,0,0.25);
+}
+
 </style>
 </head>
 
@@ -286,7 +320,6 @@ p {
 
   <div class="overlay">
 
-    <!-- LANG -->
     <div class="lang-switch">
       <button onclick="setLang('en')">EN</button>
       <button onclick="setLang('pt')">PT</button>
@@ -379,6 +412,11 @@ p {
 
 </div>
 
+<!-- WHATSAPP -->
+<a href="https://wa.me/5599999999999" class="wpp-btn" target="_blank">
+  💬 Faça seu orçamento
+</a>
+
 <!-- JS -->
 <script>
 
@@ -434,7 +472,7 @@ document.querySelectorAll('.project').forEach(card => {
   });
 });
 
-/* 🔥 LANG SCRIPT */
+/* LANG */
 function setLang(lang){
   document.querySelectorAll('[data-en]').forEach(el => {
     const text = el.getAttribute(`data-${lang}`);
